@@ -1,5 +1,6 @@
-from app.services.bank import Bank
+from app.services.ivr import Ivr
 
 ivr_commands = {
-    1: Bank.lookup_customer_by_phone
+    1: Ivr.customer_lookup,
+    2: Ivr.process_voicemail
 }

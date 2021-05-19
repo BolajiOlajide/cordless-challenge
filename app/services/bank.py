@@ -1,7 +1,9 @@
+from datetime import datetime
+
 import requests
-from flask import jsonify
 
 from config import BANK_BASE_API_URL
+
 
 class Bank:
     @staticmethod
@@ -13,7 +15,39 @@ class Bank:
             json = response.json()
             customer_info = json['customer']
 
-        if customer_info is None:
-            return jsonify({"error": "Customer with the phone number doesnt exist."}), 404
+        return customer_info
 
-        return jsonify(dict(customer=customer_info)), 201
+    @staticmethod
+    def create_urgent_ticket(phone_number, customer_id = None):
+        url = f"{BANK_BASE_API_URL}/urgent-tickets"
+        data = {
+            "phone_number_from": phone_number,
+            "time_of_call": datetime.now().strftime("%H:%M:%S")
+        }
+
+        if customer_id:
+            data["customer_id"] = customer_id
+
+        response = requests.post(url=url, data=data)
+
+        if response.ok:
+            return True
+
+        return False
+
+    @staticmethod
+    def create_non_urgent_ticket(phone_number, recording_url, transcript):
+        url = f"{BANK_BASE_API_URL}/urgent-tickets"
+        data = {
+            "phone_number_from": phone_number,
+            "recording_url": recording_url,
+            "transcript": transcript
+        }
+
+        response = requests.post(url=url, data=data)
+
+        if response.ok:
+            return True
+
+        return False
+
