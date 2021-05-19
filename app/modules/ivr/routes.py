@@ -1,12 +1,8 @@
 from flask import request, jsonify
 
 from . import ivr_blueprint
-from app.services.bank import Bank
+from .commands import ivr_commands
 
-
-ivr_commands = {
-    1: Bank.lookup_customer_by_phone
-}
 
 @ivr_blueprint.route('', methods=['POST', 'OPTIONS'])
 def ivr():
