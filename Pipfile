@@ -8,6 +8,7 @@ flask = "*"
 python-dotenv = "*"
 
 [dev-packages]
+black = "==18.9b0"
 
 [requires]
 python_version = "3.8"

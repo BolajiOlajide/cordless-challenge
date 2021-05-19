@@ -1,14 +1,14 @@
-from flask import Flask, request
+from app import app
 
-app = Flask(__name__)
 
-@app.route('/ivr')
+@app.route("/ivr")
 def ivr():
-        ################################
-        ######## You code here! ########
-        ################################
+    ################################
+    ######## You code here! ########
+    ################################
 
-        return "ok!!", 200
+    return "ok!!", 200
+
 
 if __name__ == "__main__":
     app.run(debug=True)
